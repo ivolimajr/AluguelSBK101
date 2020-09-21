@@ -1,0 +1,74 @@
+﻿@model dev_skb101.Models.revisao
+
+@{
+    ViewBag.Title = "Details";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Detalhes de uma Revisão</h2>
+
+<div>
+    <h4>revisao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.autor)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataRevisao)
+        </dt>
+
+        <dd>
+            @{
+                DateTime dataRevisao = Convert.ToDateTime(Model.dataRevisao.Value);
+            }
+            @dataRevisao.ToString("dd/MM/yyyy")
+        </dd>
+        <br />
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+        <br />
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bicicleta.nome)
+        </dd>
+        <br />
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacao)
+        </dd>
+        <br />
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

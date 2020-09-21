@@ -1,0 +1,71 @@
+﻿@model dev_skb101.Models.bicicleta
+
+@{
+    ViewBag.Title = "Details";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>bicicleta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alugada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AlugadaString)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ativa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ativaString)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vezesAlugada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.vezesAlugada)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.codigo)
+        </dd>
+        <br />
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

@@ -1,0 +1,46 @@
+﻿@model dev_skb101.Models.tipobike
+
+@{
+    ViewBag.Title = "Details";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Detalhes de um tipo de Alguel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.valorHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorHora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorDiaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorDiaria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descicao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<dev_skb101.Models.bicicleta>
+
+@{
+    ViewBag.Title = "Index";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Minhas Bikes Cadastradas</h2>
+
+<p>
+    <h3 style="text-align:center"> @Html.ActionLink("ADICIONAR", "Create", null, new { @class="btn btn-success" })</h3>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Alugada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vezesAlugada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.codigo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AlugadaString)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ativaString)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.vezesAlugada)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descricao)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+        @Html.ActionLink("Remover", "Delete", new { id = item.id })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<dev_skb101.Models.revisao>
+
+@{
+    ViewBag.Title = "Index";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Todas as Revisões Realizadas</h2>
+
+<p>
+    <h3 style="text-align:center"> @Html.ActionLink("ADICIONAR", "Create", null, new { @class = "btn btn-success" })</h3>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.autor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataRevisao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observacao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        DateTime dataRevisao = Convert.ToDateTime(item.dataRevisao.Value);
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.autor)
+    </td>
+    <td>
+        @dataRevisao.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.bicicleta.nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descricao)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.observacao)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+        @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+    </td>
+</tr>
+    }
+
+</table>

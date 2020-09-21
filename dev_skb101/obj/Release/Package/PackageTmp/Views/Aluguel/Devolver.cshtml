@@ -1,0 +1,71 @@
+﻿@model dev_skb101.Models.aluguel
+
+@{
+    ViewBag.Title = "Devolver";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+
+<h3>Devolução de Bicicleta Alugada</h3>
+<div>
+    <h4>Confirme os dados da bicicleta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dataEntrada)
+        </dt>
+
+        <dd>
+            @{
+                DateTime dataEntrada = Convert.ToDateTime(Model.dataEntrada.Value);
+                dataEntrada.ToString("dd/MM/yyyy");
+            }
+            @dataEntrada.ToString("dd/MM/yyyy")
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataSaida)
+        </dt>
+        <dd>
+            @{
+                DateTime dataSaida = Convert.ToDateTime(Model.dataSaida.Value);
+                dataSaida.ToString("dd/MM/yyyy");
+            }
+            @dataSaida.ToString("dd/MM/yyyy")
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bicicleta.nome)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipobike.descicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipobike.descicao)
+        </dd>
+        <br />
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Devolver" class="btn btn-success" /> |
+            @Html.ActionLink("Retornar", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<dev_skb101.Models.revisao>
+@{
+    Layout = null;
+    int contador = 0;    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+
+    if (Session["UserAdmin"] == null)
+    {
+        Response.Redirect("~/Home/index");
+    }
+}
+<style>
+    body {
+        text-align: justify;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<table style="width:100%">
+    <tr>
+        <th>
+            N°
+        </th>
+        <th>
+            Data da Revisão
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bicicleta_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.autor)
+        </th>
+        <th>
+            O que foi feito
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observacao)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        contador = contador +1;
+<tr>
+    <td>
+        @contador
+    </td>
+    <th>
+        @Html.DisplayFor(modelItem => item.dataRevisao)
+    </th>
+    <th>
+        @Html.DisplayFor(modelItem => item.bicicleta.nome)
+    </th>
+    <th>
+        @Html.DisplayFor(modelItem => item.autor)
+    </th>
+    <th>
+        @Html.DisplayFor(modelItem => item.descricao)
+    </th>
+    <th>
+        @Html.DisplayFor(modelItem => item.observacao)
+    </th>
+</tr>
+    }
+
+</table>

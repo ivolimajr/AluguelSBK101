@@ -1,0 +1,48 @@
+﻿@{ 
+        if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+
+    if (Session["UserAdmin"] == null)
+    {
+        Response.Redirect("~/Home/index");
+    }
+}
+<style>
+    .jumbotron {
+        background-color: cadetblue;
+        color: black;
+    }
+    .row{
+        padding-left: 100px;
+    }
+</style>
+<br />
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4" style="text-align: center">Meus Relatórios</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="@Url.Action("Bicicleta", "Relatorio")" target = "_blank">
+            <img src="~/Content/imgRelatorios/bike01.jpg" style="align-content:center" alt="Alternate Text" />
+        </a>
+        <h2 style="color:dodgerblue; text-align: left">Bicicletas</h2>
+
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Aluguel", "Relatorio")">
+            <img src="~/Content/imgRelatorios/relatorios.png" style="align-content:center" alt="Alternate Text" />
+        </a>
+        <h2 style="color:dodgerblue">Alugueis</h2>
+    </div>
+    <div class="col">
+        <a href="@Url.Action("Revisao", "Relatorio")">
+            <img src="~/Content/imgRelatorios/Tool.jpg" />
+        </a>
+        <h2 style="color:dodgerblue">Revisões</h2>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model dev_skb101.Models.usuario
+
+@{
+    ViewBag.Title = "Delete";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/Login/Home");
+    }
+
+    if (Session["UserAdmin"] == null)
+    {
+        Response.Redirect("~/Home/index");
+    }
+}
+
+<h2>Remover</h2>
+
+<h3>Tem certeza que deseja remover este usuário?</h3>
+<div>
+    <h4>usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senha)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adminSaida)
+        </dd>
+        <br />
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-danger" /> |
+            @Html.ActionLink("Retornar", "Index")
+        </div>
+    }
+</div>

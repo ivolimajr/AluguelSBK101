@@ -1,0 +1,49 @@
+﻿@model IEnumerable<dev_skb101.Models.tipobike>
+
+@{
+    ViewBag.Title = "Index";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Tipos de Aluguel</h2>
+
+<p>
+    <h3 style="text-align:center"> @Html.ActionLink("ADICIONAR", "Create", null, new { @class = "btn btn-success" })</h3>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.valorHora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorDiaria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descicao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.valorHora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valorDiaria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descicao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.id }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

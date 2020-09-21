@@ -1,0 +1,65 @@
+﻿@model dev_skb101.Models.aluguel
+
+@{
+    ViewBag.Title = "Details";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Detalhes do Aluguel</h2>
+
+<div>
+    <h4>aluguel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dataEntrada)
+        </dt>
+
+        <dd>
+            @{
+                DateTime dataEntrada = Convert.ToDateTime(Model.dataEntrada.Value);
+                dataEntrada.ToString("dd/MM/yyyy");
+            }
+            @dataEntrada.ToString("dd/MM/yyyy")
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataSaida)
+        </dt>
+        <dd>
+            @{
+                DateTime dataSaida = Convert.ToDateTime(Model.dataSaida.Value);
+                dataSaida.ToString("dd/MM/yyyy");
+            }
+            @dataSaida.ToString("dd/MM/yyyy")
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bicicleta.nome)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipobike.descicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipobike.descicao)
+        </dd>
+        <br />
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

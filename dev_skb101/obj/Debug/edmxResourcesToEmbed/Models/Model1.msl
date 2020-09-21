@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sbk101dbModelStoreContainer" CdmEntityContainer="sbk101dbEntities">
+    <EntitySetMapping Name="aluguel">
+      <EntityTypeMapping TypeName="sbk101dbModel.aluguel">
+        <MappingFragment StoreEntitySet="aluguel">
+          <ScalarProperty Name="ativa" ColumnName="ativa" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipobike_id" ColumnName="tipobike_id" />
+          <ScalarProperty Name="bicicleta_id" ColumnName="bicicleta_id" />
+          <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
+          <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bicicleta">
+      <EntityTypeMapping TypeName="sbk101dbModel.bicicleta">
+        <MappingFragment StoreEntitySet="bicicleta">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="Alugada" ColumnName="Alugada" />
+          <ScalarProperty Name="ativa" ColumnName="ativa" />
+          <ScalarProperty Name="vezesAlugada" ColumnName="vezesAlugada" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="revisao">
+      <EntityTypeMapping TypeName="sbk101dbModel.revisao">
+        <MappingFragment StoreEntitySet="revisao">
+          <ScalarProperty Name="observacao" ColumnName="observacao" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="bicicleta_id" ColumnName="bicicleta_id" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+          <ScalarProperty Name="dataRevisao" ColumnName="dataRevisao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipobike">
+      <EntityTypeMapping TypeName="sbk101dbModel.tipobike">
+        <MappingFragment StoreEntitySet="tipobike">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="valorHora" ColumnName="valorHora" />
+          <ScalarProperty Name="valorDiaria" ColumnName="valorDiaria" />
+          <ScalarProperty Name="descicao" ColumnName="descicao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="sbk101dbModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

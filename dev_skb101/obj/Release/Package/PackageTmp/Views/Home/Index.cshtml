@@ -1,0 +1,151 @@
+﻿@model IEnumerable<dev_skb101.Models.aluguel>
+@{
+    ViewBag.Title = "Home Page";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+<style>
+    .jumbotron {
+        color: black;
+        background-color: transparent;
+    }
+
+    .tabela {
+        background-color: white;
+    }
+    .cabecaTable{
+        background-color: darkslategray;
+        color: white;
+    }
+    .vermelho{
+        background-color: lightcoral;
+    }
+    .verde{
+        background-color: lightgreen;
+    }
+    .azul{
+        background-color: white;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1 style="text-align:center">Sistema de Gerenciamento de Aluguel de Bikes</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            if (Session["UserAdmin"] != null)
+            {
+                <h2 style="color:dodgerblue">Usuários</h2>
+                <p>
+                    Neste painel você gerencia os usuários do sistema.
+                </p>
+                <p><a class="btn btn-success" href="../usuario/index">Ver Mais &raquo;</a></p>
+            }
+            else
+            {
+                <h2 style="color:dodgerblue">Revisões</h2>
+                <p>
+                    Informe sobre as revisões feitas nas bikes alugadas.
+                </p>
+                <p><a class="btn btn-success" href="../revisao/index">Ver Mais &raquo;</a></p>
+
+            }
+        }
+    </div>
+    <div class="col-md-4">
+        <h2 style="color:dodgerblue">Aluguel</h2>
+        <p>
+            Registre um novo Aluguel de bike.
+        </p>
+        <p><a class="btn btn-success" href="../aluguel/create">Inserir Aluguel &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2 style="color:dodgerblue">Bicicletas</h2>
+        <p>
+            Veja todas as bikes cadastradas neste sistema.
+        </p>
+        <p><a class="btn btn-success" href="../bicicleta/index">Ver Mais &raquo;</a></p>
+    </div>
+</div>
+<hr />
+<div class="tabela">
+
+    <table class="table table-striped table-dark">
+        <thead class="cabecaTable">
+            <tr>
+                <th scope="col">Retirada</th>
+                <th scope="col">Entrega</th>
+                <th scope="col">Bicicleta</th>
+                <th scope="col">Devolver</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                DateTime dataEntrada = Convert.ToDateTime(item.dataEntrada.Value);
+                DateTime dataSaida = Convert.ToDateTime(item.dataSaida.Value);
+                int result = DateTime.Compare(item.dataSaida.Value, DateTime.Now);
+
+                if (result == -1)
+                {
+            <tr>
+                <td class="vermelho">
+                    @dataEntrada.ToString("dd/MM/yyyy")
+                </td>
+                <td class="vermelho">
+                    @dataSaida.ToString("dd/MM/yyyy")
+                </td>                
+                <td class="vermelho">
+                    @Html.DisplayFor(modelItem => item.bicicleta.nome)
+                </td>
+                <td class="vermelho">
+                    <b>@Html.ActionLink("Devolver", "DevolverBike", new { id = item.id })</b>
+                </td>
+            </tr>
+                }
+                else if (result == 0)
+                {
+        <tr>
+            <td class="azul">
+                @dataEntrada.ToString("dd/MM/yyyy")
+            </td>
+            <td class="azul">
+                @dataSaida.ToString("dd/MM/yyyy")
+            </td>
+            <td class="azul">
+                @Html.DisplayFor(modelItem => item.bicicleta.nome)
+            </td>
+            <td class="azul">
+                <b>@Html.ActionLink("Devolver", "DevolverBike", new { id = item.id })</b>
+            </td>
+        </tr>
+
+                }
+                else
+                {
+        <tr>
+            <td class="verde">
+                @dataEntrada.ToString("dd/MM/yyyy")
+            </td>
+            <td class="verde">
+                @dataSaida.ToString("dd/MM/yyyy")
+            </td>
+            <td class="verde">
+                @Html.DisplayFor(modelItem => item.bicicleta.nome)
+            </td>
+            <td class="verde">
+                <b>@Html.ActionLink("Devolver", "DevolverBike", new { id = item.id })</b>
+            </td>
+        </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

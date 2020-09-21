@@ -1,0 +1,56 @@
+﻿@model dev_skb101.Models.tipobike
+
+@{
+    ViewBag.Title = "Delete";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Remover</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tipo de Aluguel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.valorHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorHora)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorDiaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorDiaria)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descicao)
+        </dd>
+        <br />
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-danger" /> |
+            @Html.ActionLink("Retornar", "Index")
+        </div>
+    }
+</div>

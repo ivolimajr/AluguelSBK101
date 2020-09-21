@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sbk101dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aluguel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipobike_id" Type="int" Nullable="false" />
+    <Property Name="bicicleta_id" Type="int" Nullable="false" />
+    <Property Name="dataEntrada" Type="datetime" />
+    <Property Name="dataSaida" Type="datetime" />
+    <Property Name="ativa" Type="bit" />
+  </EntityType>
+  <EntityType Name="bicicleta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="60" />
+    <Property Name="descricao" Type="varchar" MaxLength="100" />
+    <Property Name="Alugada" Type="bit" />
+    <Property Name="ativa" Type="bit" />
+    <Property Name="vezesAlugada" Type="int" />
+    <Property Name="codigo" Type="int" />
+  </EntityType>
+  <EntityType Name="revisao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bicicleta_id" Type="int" Nullable="false" />
+    <Property Name="autor" Type="varchar" MaxLength="40" />
+    <Property Name="descricao" Type="varchar" MaxLength="100" />
+    <Property Name="observacao" Type="varchar" MaxLength="200" />
+    <Property Name="dataRevisao" Type="date" />
+  </EntityType>
+  <EntityType Name="tipobike">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="valorHora" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="valorDiaria" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="descicao" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="60" />
+    <Property Name="login" Type="varchar" MaxLength="20" />
+    <Property Name="senha" Type="varchar" MaxLength="100" />
+    <Property Name="admin" Type="bit" />
+  </EntityType>
+  <Association Name="FK__aluguel__bicicle__2F10007B">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aluguel__bicicle__36B12243">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aluguel__tipobik__300424B4">
+    <End Role="tipobike" Type="Self.tipobike" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipobike">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="tipobike_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aluguel__tipobik__37A5467C">
+    <End Role="tipobike" Type="Self.tipobike" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipobike">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="tipobike_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revisao__bicicle__30F848ED">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="revisao" Type="Self.revisao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revisao">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revisao__bicicle__38996AB5">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="revisao" Type="Self.revisao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revisao">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sbk101dbModelStoreContainer">
+    <EntitySet Name="aluguel" EntityType="Self.aluguel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bicicleta" EntityType="Self.bicicleta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="revisao" EntityType="Self.revisao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipobike" EntityType="Self.tipobike" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__aluguel__bicicle__2F10007B" Association="Self.FK__aluguel__bicicle__2F10007B">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aluguel__bicicle__36B12243" Association="Self.FK__aluguel__bicicle__36B12243">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aluguel__tipobik__300424B4" Association="Self.FK__aluguel__tipobik__300424B4">
+      <End Role="tipobike" EntitySet="tipobike" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aluguel__tipobik__37A5467C" Association="Self.FK__aluguel__tipobik__37A5467C">
+      <End Role="tipobike" EntitySet="tipobike" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revisao__bicicle__30F848ED" Association="Self.FK__revisao__bicicle__30F848ED">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="revisao" EntitySet="revisao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revisao__bicicle__38996AB5" Association="Self.FK__revisao__bicicle__38996AB5">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="revisao" EntitySet="revisao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<dev_skb101.Models.aluguel>
+
+@{
+    ViewBag.Title = "Index";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+}
+
+<h2>Meus Alugueis</h2>
+
+<p>
+    <h3 style="text-align:center"> @Html.ActionLink("ADICIONAR", "Create", null, new { @class = "btn btn-success" })</h3>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dataEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataSaida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipobike.descicao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        
+        DateTime dataEntrada = Convert.ToDateTime(item.dataEntrada.Value);
+        DateTime dataSaida = Convert.ToDateTime(item.dataSaida.Value);
+        <tr>
+            <td>
+                @dataEntrada.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @dataSaida.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bicicleta.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipobike.descicao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+                @Html.ActionLink("Remover", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

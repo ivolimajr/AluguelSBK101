@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sbk101dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="aluguel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipobike_id" Type="Int32" Nullable="false" />
+    <Property Name="bicicleta_id" Type="Int32" Nullable="false" />
+    <Property Name="dataEntrada" Type="DateTime" Precision="3" />
+    <Property Name="dataSaida" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="bicicleta" Relationship="Self.FK__aluguel__bicicle__412EB0B6" FromRole="aluguel" ToRole="bicicleta" />
+    <NavigationProperty Name="tipobike" Relationship="Self.FK__aluguel__tipobik__4222D4EF" FromRole="aluguel" ToRole="tipobike" />
+    <Property Name="ativa" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="bicicleta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Alugada" Type="Boolean" />
+    <Property Name="ativa" Type="Boolean" />
+    <Property Name="vezesAlugada" Type="Int32" />
+    <Property Name="codigo" Type="Int32" />
+    <NavigationProperty Name="aluguel" Relationship="Self.FK__aluguel__bicicle__412EB0B6" FromRole="bicicleta" ToRole="aluguel" />
+    <NavigationProperty Name="revisao" Relationship="Self.FK__revisao__bicicle__3E52440B" FromRole="bicicleta" ToRole="revisao" />
+  </EntityType>
+  <EntityType Name="revisao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bicicleta_id" Type="Int32" Nullable="false" />
+    <Property Name="autor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="dataRevisao" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="bicicleta" Relationship="Self.FK__revisao__bicicle__3E52440B" FromRole="revisao" ToRole="bicicleta" />
+    <Property Name="descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="observacao" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tipobike">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="valorHora" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="valorDiaria" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="descicao" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="aluguel" Relationship="Self.FK__aluguel__tipobik__4222D4EF" FromRole="tipobike" ToRole="aluguel" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="senha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="admin" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__aluguel__bicicle__412EB0B6">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aluguel__tipobik__4222D4EF">
+    <End Role="tipobike" Type="Self.tipobike" Multiplicity="1" />
+    <End Role="aluguel" Type="Self.aluguel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipobike">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="aluguel">
+        <PropertyRef Name="tipobike_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revisao__bicicle__3E52440B">
+    <End Role="bicicleta" Type="Self.bicicleta" Multiplicity="1" />
+    <End Role="revisao" Type="Self.revisao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bicicleta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revisao">
+        <PropertyRef Name="bicicleta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sbk101dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="aluguel" EntityType="Self.aluguel" />
+    <EntitySet Name="bicicleta" EntityType="Self.bicicleta" />
+    <EntitySet Name="revisao" EntityType="Self.revisao" />
+    <EntitySet Name="tipobike" EntityType="Self.tipobike" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="FK__aluguel__bicicle__412EB0B6" Association="Self.FK__aluguel__bicicle__412EB0B6">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aluguel__tipobik__4222D4EF" Association="Self.FK__aluguel__tipobik__4222D4EF">
+      <End Role="tipobike" EntitySet="tipobike" />
+      <End Role="aluguel" EntitySet="aluguel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revisao__bicicle__3E52440B" Association="Self.FK__revisao__bicicle__3E52440B">
+      <End Role="bicicleta" EntitySet="bicicleta" />
+      <End Role="revisao" EntitySet="revisao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

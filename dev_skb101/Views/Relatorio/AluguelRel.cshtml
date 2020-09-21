@@ -1,0 +1,65 @@
+﻿@model IEnumerable<dev_skb101.Models.aluguel>
+@{
+    Layout = null;
+    int contador = 0;    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+
+    if (Session["UserAdmin"] == null)
+    {
+        Response.Redirect("~/Home/index");
+    }
+}
+<style>
+    body {
+        text-align: justify;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<table style="width:100%">
+    <tr>
+        <th>
+            N°
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bicicleta.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataSaida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipobike.descicao)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        contador = contador +1;
+        <tr>
+            <td>
+                @contador
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bicicleta.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataEntrada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipobike.descicao)
+            </td>
+        </tr>
+    }
+
+</table>
