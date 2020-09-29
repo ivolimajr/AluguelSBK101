@@ -1,5 +1,5 @@
-﻿@model IEnumerable<dev_skb101.Models.revisao>
-
+﻿@model PagedList.IPagedList<dev_skb101.Models.revisao>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     if (Session["UserId"] == null)
@@ -16,19 +16,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.autor)
+            @Html.DisplayName("Autor")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dataRevisao)
+            @Html.DisplayName("Data da Revisão")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.bicicleta.nome)
+            @Html.DisplayName("Modelo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.descricao)
+            @Html.DisplayName("Descrição")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.observacao)
+            @Html.DisplayName("Observação")
         </th>
         <th></th>
     </tr>
@@ -36,28 +36,32 @@
     @foreach (var item in Model)
     {
         DateTime dataRevisao = Convert.ToDateTime(item.dataRevisao.Value);
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.autor)
-    </td>
-    <td>
-        @dataRevisao.ToString("dd/MM/yyyy")
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.bicicleta.nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.descricao)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.observacao)
-    </td>
-    <td>
-        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
-        @Html.ActionLink("Deletar", "Delete", new { id = item.id })
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.autor)
+            </td>
+            <td>
+                @dataRevisao.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bicicleta.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.observacao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+            </td>
+        </tr>
     }
 
 </table>
+
+Página @Model.PageNumber de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { pagina = page }))

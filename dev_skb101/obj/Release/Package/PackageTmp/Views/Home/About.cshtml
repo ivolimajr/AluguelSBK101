@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Sobre o sistema";
     if (Session["UserId"] == null)
     {
         Response.Redirect("~/home/login");
@@ -7,5 +7,27 @@
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+    <p>Olá professor Wesley, você está em um projeto que é cópia de um que já está implantado. Te enviei dois tipos de usuários do sistema.</p><br />
 
-<p>Use this area to provide additional information.</p>
+
+<h3>Detalhes do sistema</h3>
+    <p>Esse sistema trata de um gerenciamento de aluguel de bicicletas de uma empresa aqui em Brasília. A necessidade surgiu quando o responsável pelo local não sabia a atual situação das bicicletas que ele aluga. Então junto com alguns profissionais do setor de oficina da loja, fizemos esse sistema para saber se uma bicicleta está alugada, disponível para ser alugada, em manutenção <i>(indisponível)</i> ou inativa</p>
+
+    <p>Em breve irei implementar os gráficos como solicitado. Fico a disposição via email. Obrigado por todo aprendizado.</p>
+
+<hr />
+
+<h3>Regra(s)</h3> <h6>Algumas regras básicas do sistema.</h6>
+<p>
+    <b>1 - </b>O sistema deve permitir a inserção das bicicletas.<br />
+    <b>2 - </b>O sistema deve permitir a criação de registros de aluguel, inserindo o dia e hora da bicicleta alugada. <br />
+    <b>3 - </b>Ao alugar uma bicicleta o sistema deve remover a bicicleta da lista de disponível e colocar status de alugada <br />
+    <b>4 - </b>Ao alugar uma bicicleta o sistema deve colocar na página de início em forma de lista todas as bicicletas que estão alugadas <br />
+    <b>5 - </b>O sistema deve colocar em vermelho as bicicletas que estão com  devoluçao atrasada <br />
+    <b>6 - </b>O sistema deve colocar em verde as bicicletas que estão com aluguel em dia <br />
+    <b>7 - </b>O sistema deve ter um espaço para insetir todas as revisões feitas nas bicicletas de aluguel.
+    <b>8 - </b>O sistema deve ter relatórios de todas as bicicletas<br />
+    <b>9 - </b>O sistema deve ter relatório das manutenções feitas em cada bicicleta<br />    
+</p>
+
+<hr />

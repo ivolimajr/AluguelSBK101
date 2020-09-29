@@ -36,6 +36,8 @@ namespace dev_skb101.Models
         public Nullable<int> codigo { get; set; }
         public string AlugadaString { get; set; }
         public string ativaString { get; set; }
+        public Nullable<int> vendida { get; set; }
+        public string vendidaString { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aluguel> aluguel { get; set; }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using dev_skb101.Models;
+using PagedList;
 
 namespace dev_skb101.Controllers
 {
@@ -15,17 +16,20 @@ namespace dev_skb101.Controllers
         private sbk101dbEntities db = new sbk101dbEntities();
 
         // GET: Bicicleta
-        public ActionResult Index()
+        public ActionResult Index(int? pagina)
         {
+            var listaBanco = db.bicicleta.SqlQuery("SELECT * FROM bicicleta WHERE vendida != ' 1 ' ORDER BY codigo").ToList();
+
+
             List<bicicleta> listaBicicleta = new List<bicicleta>();
             listaBicicleta = db.bicicleta.ToList();
             foreach (var item in db.bicicleta.ToList())
             {
-                if(item.Alugada == true)
+                if (item.Alugada == true)
                 {
                     item.AlugadaString = "Disponível";
                 }
-                if(item.Alugada == false)
+                if (item.Alugada == false)
                 {
                     item.AlugadaString = "Alugada";
                 }
@@ -37,8 +41,16 @@ namespace dev_skb101.Controllers
                 {
                     item.ativaString = "Indisponível";
                 }
+                if (item.vendida == 1)
+                {
+                    item.vendidaString = "Vendida";
+                }
             }
-            return View(db.bicicleta.ToList());
+
+            int tamanhoPagina = 20;
+            int numeroPagina = pagina ?? 1;
+
+            return View(listaBanco.ToPagedList(numeroPagina, tamanhoPagina));
         }
 
         // GET: Bicicleta/Details/5
@@ -52,7 +64,8 @@ namespace dev_skb101.Controllers
             if (bicicleta == null)
             {
                 return HttpNotFound();
-            } else
+            }
+            else
             {
                 if (bicicleta.Alugada == true)
                 {
@@ -90,6 +103,7 @@ namespace dev_skb101.Controllers
             if (ModelState.IsValid)
             {
                 bicicleta.vezesAlugada = 0;
+                bicicleta.vendida = 0;
                 db.bicicleta.Add(bicicleta);
                 db.SaveChanges();
                 return RedirectToAction("index");
@@ -188,7 +202,9 @@ namespace dev_skb101.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             bicicleta bicicleta = db.bicicleta.Find(id);
-            db.bicicleta.Remove(bicicleta);
+            bicicleta.vendida = 1;
+            bicicleta.codigo = 0;
+            db.Entry(bicicleta).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

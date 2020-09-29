@@ -1,4 +1,5 @@
-﻿@model IEnumerable<dev_skb101.Models.aluguel>
+﻿@model PagedList.IPagedList<dev_skb101.Models.aluguel>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -16,23 +17,23 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.dataEntrada)
+            @Html.DisplayName("Data Entrada")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dataSaida)
+            @Html.DisplayName("Data Saída")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.bicicleta.nome)
+            @Html.DisplayName("Bicicleta")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tipobike.descicao)
+            @Html.DisplayName("Descrição")
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        
+
         DateTime dataEntrada = Convert.ToDateTime(item.dataEntrada.Value);
         DateTime dataSaida = Convert.ToDateTime(item.dataSaida.Value);
         <tr>
@@ -57,3 +58,7 @@
     }
 
 </table>
+
+Página @Model.PageNumber de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { pagina = page }))

@@ -53,9 +53,14 @@ namespace dev_skb101.Controllers
         }
         [HttpPost,]
         public ActionResult AluguelRel([Bind(Include = "dataEntrada,dataSaida")] aluguel aluguel)
-        {   
+        {
 
-            var listaBanco = db.aluguel.SqlQuery("SELECT * FROM aluguel WHERE dataSaida BETWEEN ' "+ aluguel.dataEntrada + " ' AND ' "+ aluguel.dataSaida + " ' ORDER BY dataSaida").ToList();
+            DateTime dataEntrada = (DateTime)aluguel.dataEntrada;
+            string dataEntradaStr = dataEntrada.ToString("MM-dd-yyyy");
+            DateTime dataSaida = (DateTime)aluguel.dataSaida;
+            string dataSaidaStr = dataSaida.ToString("MM-dd-yyyy");
+
+            var listaBanco = db.aluguel.SqlQuery("SELECT * FROM aluguel WHERE dataSaida BETWEEN ' " + dataEntradaStr + " ' AND ' " + dataSaidaStr + " ' ORDER BY dataSaida").ToList();
 
             return View(listaBanco.ToList());
         }
@@ -77,8 +82,12 @@ namespace dev_skb101.Controllers
         [HttpPost,]
         public ActionResult revisaoRel([Bind(Include = "dataRevisao,dataFim")] revisao revisao)
         {
+            DateTime dataRevisao = (DateTime)revisao.dataRevisao;
+            string revisaoI = dataRevisao.ToString("MM-dd-yyyy");
+            DateTime dataFim = (DateTime)revisao.dataFim;
+            string revisaoF = dataFim.ToString("MM-dd-yyyy");
 
-            var listaBanco = db.revisao.SqlQuery("SELECT * FROM revisao WHERE dataRevisao BETWEEN ' " + revisao.dataRevisao + " ' AND ' " + revisao.dataFim + " ' ORDER BY dataRevisao").ToList();
+            var listaBanco = db.revisao.SqlQuery("SELECT * FROM revisao WHERE dataRevisao BETWEEN ' " + revisaoI + " ' AND ' " + revisaoF + " ' ORDER BY dataRevisao").ToList();
 
             return View(listaBanco.ToList());
         }

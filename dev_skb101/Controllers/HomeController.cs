@@ -48,7 +48,7 @@ namespace dev_skb101.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Projeto da disciplina Topicos Avançados em S.I - UDF";
 
             return View();
         }

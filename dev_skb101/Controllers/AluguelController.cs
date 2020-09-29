@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using dev_skb101.Models;
+using PagedList;
 
 namespace dev_skb101.Controllers
 {
@@ -15,10 +16,14 @@ namespace dev_skb101.Controllers
         private sbk101dbEntities db = new sbk101dbEntities();
 
         // GET: Aluguel
-        public ActionResult Index()
+        public ActionResult Index(int? pagina)
         {
-            var aluguel = db.aluguel.Where(a => a.ativa == true || a.ativa == false).Include(a => a.bicicleta).Include(a => a.tipobike);
-            return View(aluguel.ToList());
+            var aluguel = db.aluguel.Where(a => a.ativa == true || a.ativa == false).Include(a => a.bicicleta).Include(a => a.tipobike).OrderByDescending(a => a.dataEntrada).ToList();
+
+            int tamanhoPagina = 20;
+            int numeroPagina = pagina ?? 1;
+
+            return View(aluguel.ToPagedList(numeroPagina, tamanhoPagina));
         }
 
         // GET: Aluguel/Details/5
@@ -39,7 +44,7 @@ namespace dev_skb101.Controllers
         // GET: Aluguel/Create
         public ActionResult Create()
         {
-            ViewBag.bicicleta_id = new SelectList(db.bicicleta.Where(m => m.Alugada == true && m.ativa==true), "id","nome");
+            ViewBag.bicicleta_id = new SelectList(db.bicicleta.Where(m => m.Alugada == true && m.ativa == true), "id", "nome");
             //ViewBag.bicicleta_id = new SelectList(db.bicicleta, "id", "nome");
             ViewBag.tipobike_id = new SelectList(db.tipobike, "id", "descicao");
             return View();

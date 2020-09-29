@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using dev_skb101.Models;
+using PagedList;
 
 namespace dev_skb101.Controllers
 {
@@ -15,10 +16,15 @@ namespace dev_skb101.Controllers
         private sbk101dbEntities db = new sbk101dbEntities();
 
         // GET: Revisao
-        public ActionResult Index()
+        public ActionResult Index(int? pagina)
         {
-            var revisao = db.revisao.Include(r => r.bicicleta);
-            return View(revisao.ToList());
+            var revisao = db.revisao.Include(r => r.bicicleta).ToList();
+
+            int tamanhoPagina = 20;
+            int numeroPagina = pagina ?? 1;
+
+
+            return View(revisao.ToPagedList(numeroPagina, tamanhoPagina));
         }
 
         // GET: Revisao/Details/5
