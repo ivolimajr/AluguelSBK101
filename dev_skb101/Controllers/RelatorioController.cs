@@ -18,6 +18,16 @@ namespace dev_skb101.Controllers
         // GET: Relatorio
         public ActionResult Index()
         {
+            var resultado = db.bicicleta.SqlQuery("SELECT * FROM bicicleta WHERE vendida != ' 1 ' ORDER BY codigo");
+
+            string dados = "";
+            foreach (var item in resultado)
+            {
+                dados += "['" + item.nome + "'," + item.vezesAlugada.ToString() + "],";
+            }
+            dados = dados.Substring(0, dados.Length - 1);
+            ViewBag.GraficoPizza = Graficos.GerarGraficoPizza("Frequencia Aluguel", dados);
+
             return View();
         }
         // GET: Relatorio

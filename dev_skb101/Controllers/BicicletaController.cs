@@ -20,33 +20,6 @@ namespace dev_skb101.Controllers
         {
             var listaBanco = db.bicicleta.SqlQuery("SELECT * FROM bicicleta WHERE vendida != ' 1 ' ORDER BY codigo").ToList();
 
-
-            List<bicicleta> listaBicicleta = new List<bicicleta>();
-            listaBicicleta = db.bicicleta.ToList();
-            foreach (var item in db.bicicleta.ToList())
-            {
-                if (item.Alugada == true)
-                {
-                    item.AlugadaString = "Disponível";
-                }
-                if (item.Alugada == false)
-                {
-                    item.AlugadaString = "Alugada";
-                }
-                if (item.ativa == true)
-                {
-                    item.ativaString = "Boas Condições";
-                }
-                if (item.ativa == false)
-                {
-                    item.ativaString = "Indisponível";
-                }
-                if (item.vendida == 1)
-                {
-                    item.vendidaString = "Vendida";
-                }
-            }
-
             int tamanhoPagina = 20;
             int numeroPagina = pagina ?? 1;
 
